@@ -4,6 +4,9 @@ using Joosh.DotnetInstallHelper.Console.Sdks;
 using Joosh.DotnetInstallHelper.Console.Tools;
 using Joosh.DotnetInstallHelper.Console.Workloads;
 using Spectre.Console;
+using System.Diagnostics;
+using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace Joosh.DotnetInstallHelper.Console;
 
@@ -117,7 +120,7 @@ class Program
         var content = new Layout("Root").SplitRows(new Layout("TopHeader") { Size = 14 }.SplitRows(new Layout("HeaderLine1") { Size = 6 }, new Layout("HeaderLine2") { Size = 6 }), new Layout("BottomDetails"));
         content["TopHeader"]["HeaderLine1"].Update(new FigletText(".NET Install").Centered().Color(Color.Purple));
         content["TopHeader"]["HeaderLine2"].Update(new FigletText("Helper").Centered().Color(Color.Purple));
-        content["BottomDetails"].Update(new Markup("\ueb29 0.0.0\n\uf09b brunt-toast/dotnet-install-helper").Centered());
+        content["BottomDetails"].Update(new Markup($"\ueb29 {GetBuildNumber()}\n\uf09b brunt-toast/dotnet-install-helper").Centered());
 
         var panel = new Panel(content);
         panel.Height = 20;
@@ -129,5 +132,12 @@ class Program
 
         Thread.Sleep(delay);
         AnsiConsole.Clear();
+    }
+
+    private static string GetBuildNumber()
+    {
+        Assembly assembly = Assembly.GetExecutingAssembly();
+        FileVersionInfo fileVersionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
+        return Regex.Replace(fileVersionInfo.ProductVersion ?? "Unknown", @"\+.*", "+...");
     }
 }
