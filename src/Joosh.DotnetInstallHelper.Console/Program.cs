@@ -1,4 +1,5 @@
-﻿using Joosh.DotnetInstallHelper.Console.Runtimes;
+﻿using Joosh.DotnetInstallHelper.Console.Nuget;
+using Joosh.DotnetInstallHelper.Console.Runtimes;
 using Joosh.DotnetInstallHelper.Console.Sdks;
 using Joosh.DotnetInstallHelper.Console.Tools;
 using Spectre.Console;
@@ -13,6 +14,7 @@ class Program
         const string listInstalledRuntimes = "List installed runtimes";
         const string searchTools = "Search tools";
         const string removeTools = "Remove tools";
+        const string manageSource = "Manage sources";
 
         var fn = AnsiConsole.Prompt(new SelectionPrompt<string>()
             .Title("Function:")
@@ -20,7 +22,8 @@ class Program
                 listInstalledSdks,
                 listInstalledRuntimes,
                 searchTools,
-                removeTools
+                removeTools,
+                manageSource
             ]));
 
         switch (fn)
@@ -36,6 +39,9 @@ class Program
                 break;
             case removeTools:
                 RemoveTools.Execute();
+                break;
+            case manageSource:
+                ManageSources.Execute();
                 break;
         }
     }
