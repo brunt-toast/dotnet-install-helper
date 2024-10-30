@@ -15,22 +15,18 @@ class Program
 
         const string listInstalledSdks = "List installed SDKs";
         const string listInstalledRuntimes = "List installed runtimes";
-        const string searchTools = "Search tools";
-        const string removeTools = "Remove tools";
         const string manageSource = "Manage sources";
-        const string searchWorkloads = "Search workloads";
-        const string removeWorkloads = "Remove workloads";
+        const string showToolsMenu = "+ Tools";
+        const string showWorkloadsMenu = "+ Workloads";
 
         var fn = AnsiConsole.Prompt(new SelectionPrompt<string>()
             .Title("Function:")
             .AddChoices([
                 listInstalledSdks,
                 listInstalledRuntimes,
-                searchTools,
-                removeTools,
                 manageSource,
-                searchWorkloads,
-                removeWorkloads
+                showToolsMenu,
+                showWorkloadsMenu
             ]));
 
         switch (fn)
@@ -41,20 +37,62 @@ class Program
             case listInstalledRuntimes:
                 ListInstalledRuntimes.Execute();
                 break;
-            case searchTools:
-                SearchTools.Execute();
-                break;
-            case removeTools:
-                RemoveTools.Execute();
-                break;
             case manageSource:
                 ManageSources.Execute();
                 break;
+            case showToolsMenu:
+                ShowToolsMenu();
+                break;
+            case showWorkloadsMenu:
+                ShowWorkloadsMenu();
+                break;
+        }
+    }
+
+    private static void ShowWorkloadsMenu()
+    {
+        const string searchWorkloads = "Search workloads";
+        const string removeWorkloads = "Remove workloads";
+
+        AnsiConsole.Clear();
+        var fn = AnsiConsole.Prompt(new SelectionPrompt<string>()
+            .Title("Function:")
+            .AddChoices([
+                searchWorkloads,
+                removeWorkloads
+            ]));
+
+        switch (fn)
+        {
             case searchWorkloads:
                 SearchWorkloads.Execute();
                 break;
             case removeWorkloads:
                 RemoveWorkloads.Execute();
+                break;
+        }
+    }
+
+    private static void ShowToolsMenu()
+    {
+        const string searchTools = "Search tools";
+        const string removeTools = "Remove tools";
+
+        AnsiConsole.Clear();
+        var fn = AnsiConsole.Prompt(new SelectionPrompt<string>()
+            .Title("Function:")
+            .AddChoices([
+                searchTools,
+                removeTools,
+            ]));
+
+        switch (fn)
+        {
+            case searchTools:
+                SearchTools.Execute();
+                break;
+            case removeTools:
+                RemoveTools.Execute();
                 break;
         }
     }
