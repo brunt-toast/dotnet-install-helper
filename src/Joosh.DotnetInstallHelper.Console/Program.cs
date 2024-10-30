@@ -11,13 +11,14 @@ class Program
 {
     public static void Main(string[] args)
     {
-        ShowSplashScreen();
+        if (!args.Contains("--skipSplashScreen")) ShowSplashScreen();
 
         const string listInstalledSdks = "List installed SDKs";
         const string listInstalledRuntimes = "List installed runtimes";
         const string manageSource = "Manage sources";
         const string showToolsMenu = "+ Tools";
         const string showWorkloadsMenu = "+ Workloads";
+        const string exitProgram = "Quit";
 
         var fn = AnsiConsole.Prompt(new SelectionPrompt<string>()
             .Title("Function:")
@@ -26,7 +27,8 @@ class Program
                 listInstalledRuntimes,
                 manageSource,
                 showToolsMenu,
-                showWorkloadsMenu
+                showWorkloadsMenu,
+                exitProgram
             ]));
 
         switch (fn)
@@ -46,6 +48,9 @@ class Program
             case showWorkloadsMenu:
                 ShowWorkloadsMenu();
                 break;
+            case exitProgram:
+                Environment.Exit(0);
+                break;
         }
     }
 
@@ -53,13 +58,15 @@ class Program
     {
         const string searchWorkloads = "Search workloads";
         const string removeWorkloads = "Remove workloads";
+        const string goBack = "< Back";
 
         AnsiConsole.Clear();
         var fn = AnsiConsole.Prompt(new SelectionPrompt<string>()
             .Title("Function:")
             .AddChoices([
                 searchWorkloads,
-                removeWorkloads
+                removeWorkloads,
+                goBack
             ]));
 
         switch (fn)
@@ -70,6 +77,9 @@ class Program
             case removeWorkloads:
                 RemoveWorkloads.Execute();
                 break;
+            case goBack:
+                Main(["--skipSplashScreen"]);
+                break;
         }
     }
 
@@ -77,6 +87,7 @@ class Program
     {
         const string searchTools = "Search tools";
         const string removeTools = "Remove tools";
+        const string goBack = "< Back";
 
         AnsiConsole.Clear();
         var fn = AnsiConsole.Prompt(new SelectionPrompt<string>()
@@ -84,6 +95,7 @@ class Program
             .AddChoices([
                 searchTools,
                 removeTools,
+                goBack
             ]));
 
         switch (fn)
@@ -93,6 +105,9 @@ class Program
                 break;
             case removeTools:
                 RemoveTools.Execute();
+                break;
+            case goBack:
+                Main(["--skipSplashScreen"]);
                 break;
         }
     }
