@@ -8,7 +8,9 @@ internal class ListInstalledRuntimes
     {
         var raw = CommandProcessor.RunCommand("dotnet", ["--list-runtimes"]);
 
-        var lines = raw.Split('\n').Select(x => new DotnetSdkOrRuntime(x));
+        var lines = raw.Split('\n')
+            .Where(x => !string.IsNullOrEmpty(x))
+            .Select(x => new DotnetSdkOrRuntime(x));
 
         var table = lines.Tabulate().Title("Installed .NET runtimes");
 

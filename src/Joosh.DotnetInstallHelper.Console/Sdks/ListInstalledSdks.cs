@@ -8,7 +8,9 @@ internal class ListInstalledSdks
     {
         var raw = CommandProcessor.RunCommand("dotnet", ["--list-sdks"]);
 
-        var lines = raw.Split('\n').Select(x => new DotnetSdkOrRuntime(x));
+        var lines = raw.Split('\n')
+            .Where(x => !string.IsNullOrEmpty(x))
+            .Select(x => new DotnetSdkOrRuntime(x));
 
         var table = lines.Tabulate().Title("Installed .NET SDKs");
 

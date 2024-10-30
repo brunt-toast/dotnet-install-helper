@@ -1,4 +1,5 @@
-﻿using Spectre.Console;
+﻿using System.Security.Cryptography.X509Certificates;
+using Spectre.Console;
 
 namespace Joosh.DotnetInstallHelper.Console.Tools;
 
@@ -16,10 +17,12 @@ internal class SearchTools
         var installedTools = CommandProcessor.RunCommand("dotnet", ["tool", "list", "-g"])
             .Split('\n')
             .Skip(2)
+            .Where(x => !string.IsNullOrEmpty(x))
             .Select(s => s.Split(' ').First());
         var searchResults = CommandProcessor.RunCommand("dotnet", ["tool", "search", query])
             .Split('\n')
             .Skip(2)
+            .Where(x => !string.IsNullOrEmpty(x))
             .Select(x => x.Split(' ').First());
 
         // Prompt the user to select tools to install

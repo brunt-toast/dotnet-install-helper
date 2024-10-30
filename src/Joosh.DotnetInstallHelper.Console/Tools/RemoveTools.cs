@@ -8,6 +8,7 @@ internal class RemoveTools
         var installedTools = CommandProcessor.RunCommand("dotnet", ["tool", "list", "-g"])
             .Split('\n')
             .Skip(2)
+            .Where(x => !string.IsNullOrEmpty(x))
             .Select(s => s.Split(' ').First());
 
         AnsiConsole.Clear();
