@@ -25,7 +25,7 @@ internal class SearchTools
         // Prompt the user to select tools to install
         AnsiConsole.Clear();
         var toolsToInstall = AnsiConsole.Prompt(new MultiSelectionPrompt<string>()
-            .Title("Select tool(s) to install. Tools already installed are omitted.")
+            .Title("Select tool(s) to install.")
             .NotRequired()
             .AddChoices(searchResults));
 
