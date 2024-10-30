@@ -61,6 +61,7 @@ class Program
     {
         const string searchWorkloads = "Search workloads";
         const string removeWorkloads = "Remove workloads";
+        const string updateWorkloads = "Update workloads";
         const string goBack = "< Back";
 
         AnsiConsole.Clear();
@@ -69,6 +70,7 @@ class Program
             .AddChoices([
                 searchWorkloads,
                 removeWorkloads,
+                updateWorkloads,
                 goBack
             ]));
 
@@ -79,6 +81,9 @@ class Program
                 break;
             case removeWorkloads:
                 RemoveWorkloads.Execute();
+                break;
+            case updateWorkloads: 
+                UpdateWorkloads.Execute();
                 break;
             case goBack:
                 Main(["--skipSplashScreen"]);
