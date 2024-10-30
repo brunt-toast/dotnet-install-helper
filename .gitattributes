@@ -1,0 +1,57 @@
+# For unknowns, let git make its best guess, but treat as CRLF 
+*                               text=auto eol=crlf
+
+# Tell difftools to treat "unusual" code files certain ways
+*.cshtml                        text diff=html
+*.razor                         text diff=html
+*.res[wx]                       text diff=xml
+*.DotSettings                   text diff=xml 
+*.csproj                        text diff=xml 
+*.manifest                      text diff=json 
+*.editorconfig                  text diff=json 
+
+# Setup diff for document file types 
+*.{doc,DOC}                     diff=astextplain
+*.{docx,DOCX}                   diff=astextplain
+*.{dot,DOT}                     diff=astextplain
+*.{pdf,PDF}                     diff=astextplain
+*.{rtf,RTF}                     diff=astextplain
+*.epub                          diff=astextplain
+*.m{d,dx}                       diff=markdown 
+*.{t,bibt}ex                    diff=tex 
+
+# Treat images as binary 
+*.jp{g,eg}                      binary
+*.png                           binary
+*.gif                           binary
+*.ti{f,ff}                      binary
+*.ico                           binary
+*.svg                           binary
+*.eps                           binary
+
+# Treat archives as binary
+# Built-in binary attr: [attr]binary -diff -text
+*.[7bglx]z                      binary 
+*.t[abglx]z                     binary 
+*.[tr]ar                        binary
+*.bz2                           binary
+*.bzip2                         binary
+*.lzma                          binary
+*.tbz2                          binary
+*.Z                             binary
+*.zip                           binary
+*.zst                           binary
+
+# Don't change line endings on patches 
+*.patch                         -text 
+
+# Treat linux scripts as lf endings
+*.{ba,fi,k,z}sh                 text eol=lf
+*.sh                            text eol=lf
+*.pl                            text eol=lf
+
+# Treat macOS-specific files with lf endings 
+*.plist                         text eol=lf 
+
+# Exclude git files from exports (see git-archive(1))
+.git{attributes,keep,ignore}    export-ignore 
