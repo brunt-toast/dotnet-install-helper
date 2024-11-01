@@ -3,6 +3,7 @@ using Joosh.DotnetInstallHelper.Console.Runtimes;
 using Joosh.DotnetInstallHelper.Console.Sdks;
 using Joosh.DotnetInstallHelper.Console.Tools;
 using Joosh.DotnetInstallHelper.Console.Workloads;
+using Joosh.DotnetInstallHelper.Console.Build;
 using Spectre.Console;
 using System.Diagnostics;
 using System.Reflection;
@@ -19,6 +20,7 @@ class Program
         const string listInstalledSdks = "List installed SDKs";
         const string listInstalledRuntimes = "List installed runtimes";
         const string manageSource = "Manage sources";
+        const string buildProject = "Build project";
         const string showToolsMenu = "+ Tools";
         const string showWorkloadsMenu = "+ Workloads";
         const string exitProgram = "Quit";
@@ -29,6 +31,7 @@ class Program
                 listInstalledSdks,
                 listInstalledRuntimes,
                 manageSource,
+                buildProject,
                 showToolsMenu,
                 showWorkloadsMenu,
                 exitProgram
@@ -44,6 +47,9 @@ class Program
                 break;
             case manageSource:
                 ManageSources.Execute();
+                break;
+            case buildProject:
+                BuildProject.Execute();
                 break;
             case showToolsMenu:
                 ShowToolsMenu();
