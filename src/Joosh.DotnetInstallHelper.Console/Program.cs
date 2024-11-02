@@ -25,6 +25,7 @@ class Program
         const string manageSource = "Manage sources";
         const string buildProject = "Build project";
         const string runProject = "Run project";
+        const string runDotnetInstaller = "Run .NET Installer";
         const string showToolsMenu = "+ Tools";
         const string showWorkloadsMenu = "+ Workloads";
         const string exitProgram = "Quit";
@@ -37,6 +38,7 @@ class Program
                 manageSource,
                 buildProject,
                 runProject,
+                runDotnetInstaller,
                 showToolsMenu,
                 showWorkloadsMenu,
                 exitProgram
@@ -58,6 +60,9 @@ class Program
                 break;
             case runProject:
                 RunProject.Execute();
+                break;
+            case runDotnetInstaller:
+                InstallDotNet();
                 break;
             case showToolsMenu:
                 ShowToolsMenu();
@@ -196,7 +201,8 @@ class Program
                     ]));
 
                 if (fn == installDotnet) InstallDotNet();
-                else Environment.Exit(0);
+                
+                Environment.Exit(0);
             } 
 
         }
@@ -285,7 +291,6 @@ class Program
         finally
         {
             process.Close();
-            Environment.Exit(0);
         }
     }
 }
